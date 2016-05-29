@@ -2,6 +2,8 @@
 
 ## History （how we got there）
 
+> There may be some problems because I don't fully understand the slides...
+
 1. Centralised system
 	* Single physical system. All resources are fully shared and tightly coupled within one integrated OS. (Time sharing???)
 2. Parallel system
