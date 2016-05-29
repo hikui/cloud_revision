@@ -68,7 +68,7 @@ $\alpha$: fraction of running time sequential program **speeds on** parallel par
 * Speculation: very complex, can't understand...
 * Parametric Computation: never seen in the slides
 
-### Erroneous Assumptions of Distributed Systems
+### Erroneous Assumptions of Distributed Systems (Problems that hard to deal with)
 
 1. The network is reliable
 2. Latency is zero
@@ -78,4 +78,5 @@ $\alpha$: fraction of running time sequential program **speeds on** parallel par
 6. There is one administrator
 7. Transport cost is zero
 8. The netowrk is homogeneous
-9. The time is _ubiquitous_ (There is no global time)
+9. The time is _ubiquitous_ (Because there is no global time)
+
