@@ -55,9 +55,22 @@
 		* security
 		* loss of control
 		* possible lock-in
+		* dependency of cloud provider continued existence
 * Private clouds
+   * pros  
+      * Control
+      * consolidation of resources
+      * easier to secure
+      * more trust
 	* cons
 		* core business irrelevent
 		* staff/management overheads
 		* hardware obsolescence
-* Hybrid clouds
+		* over/under utilization challenges
+* Hybrid clouds  
+   * pros: 
+      * cloud-bursting: use private cloud, but burst into public cloud when need  
+   * cons:
+      * how to move data/resources when needed
+      * don't know when to burst into public and what data can go to public cloud
+      * don't know public cloud compliant with PCI-DSS ( Payment Card Industry- Data Security Standard)

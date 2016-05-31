@@ -33,8 +33,11 @@ The 'Vs':
 No partition torlerance: if one node crashes, then the coordinator will abort the transaction.   
 A good solution when the cluster is co-located, less good when it is distributed.
 
-### Consistency and partition-tolerance -- Paxos
-
+### Consistency and partition-tolerance -- Paxos  
+*  This famliy of algorithms is driven by consensus
+*  every node is either a proposer or an accepter
+   * one proposer propoes a value, other accepters accepts or refuses it
+* when a proposer got sufficient number of acceptances, it sends confirmation message to a accepters with the agreed value
 ### Availability and Partition-tolerance -- Multi-Version concurrency control
 
 * concurrent updates are possible without distributed locks, since the updates will have different revision numbers. (in ==optimistic locking== only)
