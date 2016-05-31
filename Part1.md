@@ -2,6 +2,7 @@
 
 # Overview 
 
+Vertical scaling: have 
 Horizontal scaling: have more processors
 
 Types of parallel:
