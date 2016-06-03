@@ -44,7 +44,7 @@ Every component runs within the same JVM.
 ![](img/spark_local.png)  
   
 #### Cluster mode  
-In cluster mode, every component, including the driver program, is executed on the cluster; hence, upon launching, the job can run autonomously. This is the common way of running non-interactive Spark jobs.  
+In cluster mode, every component, including the driver program, is executed on the cluster; hence, upon launching, the job can run autonomously. This is the common way of running ==non-interactive Spark jobs==.  
   
 ![](img/spark_cluster.png)  
 

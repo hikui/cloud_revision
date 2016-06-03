@@ -1,4 +1,4 @@
-# Cluster and Cloud Computing Revision
+# Cluster and Distributed Computing
 
 # Overview 
 
@@ -24,7 +24,7 @@ Types of parallel:
 \\]
 
 $f$: fraction of work that cannot be parallelised.   
-$p$: number of procs
+$p$: number of processors.
 
 Meaning: if the **fraction** of serial work is fixed, then the speedup is limited.
 

@@ -41,6 +41,12 @@ Two different architectural design:
 * REST is centered around resources, and the way they can be manipulated (HTTP actions) remotely.
 * SOAP/WS is a stack of protocols that covers ==every aspect of using a remote service==, from service discovery to service description, to the actual request/response.
 
+---
+
+REST is very easy to understand and is extremely approachable, but does lack standards and is considered an architectural approach. In comparison, SOAP is an industry standard with a well-defined protocol and a set of well-established rules to be implemented, and it has been used in systems both big and small.
+
+https://www.infoq.com/articles/rest-soap-when-to-use-each
+
 ## REST
 
 ![](img/REST.png)
@@ -65,7 +71,7 @@ HATEOAS stands for Hypertext As The Engine Of Application State. It means that _
 
 Example:
 
-```XML
+```xml
 GET /account/12345 HTTP/1.1
 
 HTTP/1.1 200 OK
@@ -80,7 +86,6 @@ HTTP/1.1 200 OK
 </account>
 
 ```
-> This is actually rarely seen in the real world... 
 
 ### Making resources navigable (RESTful)
 
@@ -167,7 +172,7 @@ Use PUT when you can update a resource completely through a specific resource. F
 
 If you do not know the actual resource location, for instance, when you add a new article, but do not have any idea where to store it, you can POST it to an URL, and let the server decide the actual URL.
 
-```
+```xml
 PUT /article/1234 HTTP/1.1
 <article>
     <title>red stapler</title>
@@ -175,7 +180,7 @@ PUT /article/1234 HTTP/1.1
 </article>
 ```
 
-```
+```xml
 POST /articles HTTP/1.1
 <article>
     <title>blue stapler</title>
@@ -188,7 +193,7 @@ Location: /articles/63636
 
 You CAN add new resources through PUT as well. The next example is perfectly valid if your API provides this functionality:
 
-```
+```xml
 PUT /articles/green-stapler HTTP/1.1
 <article>
     <title>green stapler</title>
@@ -198,12 +203,6 @@ PUT /articles/green-stapler HTTP/1.1
 HTTP/1.1 201 Created
 Location: /articles/green-stapler
 ```
-
-My comment:
-
-> Most web frameworks don't provide 5, i.e. HATEOAS. There are some debates about HATEOAS. See [this](https://jeffknupp.com/blog/2014/06/03/why-i-hate-hateoas/) for more.
-> 
-> And also here is a more cutting-edge API technology: [GraphQL](https://jeffknupp.com/blog/2014/06/03/why-i-hate-hateoas/).
 
 
 [^UniformInterface]: https://en.wikipedia.org/wiki/Representational_state_transfer#Uniform_interface

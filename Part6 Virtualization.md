@@ -147,9 +147,31 @@ Hosted Virtualisation – VMM runs on top of another operating system
 
 Also called **"containers"**. The kernel of an operating system allows the existence of multiple ==isolated user-space instances==, instead of just one.
 
+## Memory Virtualization
+
+
+## Further Reading
+
+[
+Know the Difference between VMWare, KVM, OpenVZ, Xen, Virtuozzo](http://kb.enterprisevpssolutions.com/know-the-difference-between-vmware-kvm-openvz-xen-virtuozzo/)
+
 # Linux Containers
 
-# OpenStack
+Problems of virtualization: cost resources. The cost in terms of disk and RAM of replicating an entire operating system can be huge.
 
-# Docker
+![](img/vm_stack.png)
+*Virtualization architecture*
+
+![](img/container_stack.png)
+*Containerization architecture*
+
+## VM vs Containers
+
+![](img/vm_container_comp.png)
+
+## When to use containers? Why are containers important?
+
+If you have to run many applications on the same machine, it issimpler to keep them separated in different containers.
+
+Containers offer a way to ==isolate applications and related libraries/configurations from each other==. This is important because upgrading a single library can cause incompatibilities to appear in apparently unrelated applications.
 

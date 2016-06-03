@@ -42,3 +42,13 @@ A good solution when the cluster is co-located, less good when it is distributed
 
 * concurrent updates are possible without distributed locks, since the updates will have different revision numbers. (in ==optimistic locking== only)
 * Coarse-grained DBMS models fit the optimistic locking of the MVCC method, since the number of transactions is less than in a comparable relational design.
+
+## Challenges of big data analytics
+
+Has to distribute both data and processing over many nodes.
+
+* Reading and writing distributed datasets.
+* Preserving data in the presence of failing data nodes.
+* Supporting the executionof MaReduce tasks.
+* Being fault-tolerant.
+* Coordinating the execution of tasks across a cluster.

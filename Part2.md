@@ -1,5 +1,9 @@
 # Cloud
 
+## What is cloud computing
+
+Cloud computing is a kind of ==Internet-based computing== that provides shared processing resources and data to computers and other devices ==on demand==.
+
 ## History （how we got there）
 
 > There may be some problems because I don't fully understand the slides...
