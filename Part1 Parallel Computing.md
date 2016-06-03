@@ -1,6 +1,6 @@
-# Cluster and Distributed Computing
+# Parallel and Distributed Computing
 
-# Overview 
+# Overview
 
 Vertical scaling: have faster processors  
 Horizontal scaling: have more processors

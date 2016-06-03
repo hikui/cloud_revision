@@ -175,3 +175,4 @@ If you have to run many applications on the same machine, it issimpler to keep 
 
 Containers offer a way to ==isolate applications and related libraries/configurations from each other==. This is important because upgrading a single library can cause incompatibilities to appear in apparently unrelated applications.
 
+## Docker

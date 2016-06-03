@@ -4,6 +4,19 @@
 
 Cloud computing is a kind of ==Internet-based computing== that provides shared processing resources and data to computers and other devices ==on demand==.
 
+## What is the difference between Cloud, Grid and Cluster? 
+
+> Warning!
+> 
+> Copied from StackOverflow. (These can also be found in ADB slides)
+
+Cluster differs from Cloud and Grid in that a cluster is a group of computers ==connected by a local area network (LAN)== **(Spartan)**, whereas cloud and grid are more wide scale and can be ==geographically distributed==. Another way to put it is to say that ==a cluster is tightly coupled==, whereas a Grid or a cloud is loosely coupled. 
+
+The difference between a cloud and a grid can be expressed as below:
+
+* Resource distribution: Cloud computing is a ==centralized model== whereas grid computing is a ==decentralized model== where the computation could occur over many administrative domains.
+* Ownership: A grid is a collection of computers which is ==owned by multiple parties in multiple locations== and connected together so that users can ==share== the combined power of resources. Whereas a cloud is a collection of computers usually ==owned by a single party==.
+
 ## History （how we got there）
 
 > There may be some problems because I don't fully understand the slides...
