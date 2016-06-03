@@ -43,7 +43,109 @@ Computer operating systems provide different levels of access to resources. A pr
 
 * Privileged Instructions:   
 	instructions that trap if the processor is in user mode and do not trap in kernel mode.
+* Sensitive Instructions:    
+	instructions whose behaviour depends on the mode or configuration of the hardware. Different behaviours depending on whether in user or kernel mode.
+* __Innocuous__ Instructions: instructions that are neither privileged nor sensitive –  Read data, add numbers etc.
+
+#### Intel Privileged and Sensitive Instructions (optional)
+
+The Intel architecture defines "privileged" instructions and "sensitive" instructions. The privileged instructions may ==only be executed when the Current Privilege Level is zero (CPL = 0)==. Attempting to execute a privileged instruction when CPL != 0 ==will generate a general protection (GP) exception==. Windows traps GP exceptions caused by executing privileged instructions and usually generates an application error. 
+
+The sensitive instructions (also called IOPL-sensitive) may only be executed when CPL <= IOPL (I/O Privilege Level). Attempting to execute a sensitive instruction when CPL > IOPL will generate a GP exception. This should usually not cause a fatal error. The Windows Virtual Machine Manager ==(VMM) traps GP exceptions caused by executing sensitive instructions and (depending on the instruction) either simulates the instruction's behavior in the VM in which the instruction was executed, or dispaches it to a virtual device driver, which simulates the instruction's behavior== (trap and emulate). 
+
+---
+
+### Popek and Goldberg Theorem
+
+For any conventional third-generation computer, an effective VMM may be constructed if the set of sensitive instructions for that computer is a subset of the set of privileged instructions.
+
+> Some architectures, like the non-hardware-assisted x86, do not meet these conditions, so they cannot be virtualized in the classic way. But architectures can still be fully virtualized (in the x86 case meaning at the CPU and MMU level) by using different techniques like _binary translation_, which replaces the sensitive instructions that do not generate traps, which are sometimes called critical instructions.
+
+## Properties of interest
+
+There are three properties of interest when analyzing the environment created by a VMM.
+
+* Equivalence / Fidelity   
+	A program running under the VMM should exhibit a behavior essentially identical to that demonstrated when running on an equivalent machine directly.
+* Resource control / Safety   
+	The VMM must be in complete control of the virtualized resources.
+* Efficiency / Performance   
+	A statistically dominant fraction of machine instructions must be executed without VMM intervention.
 	
+## Typical virtualization strategy
+
+Trap-and-emulate
+
+![](img/trap_and_emulate.png)
+
+### VMM needs to support:
+
+* De-privileging   
+	* VMM emulates the effect on system/hardware resources of privileged instructions whose execution traps into the VMM. aka trap-and-emulate.
+	* Typically achieved by running GuestOS at a lower hardware priority level than the VMM.
+* Primary/shadow structures
+	* VMM maintains “shadow” copies of critical structures whose “primary” versions are manipulated by the GuestOS, e.g. memory page tables.
+	* Primary copies needed to insure correct versions are visible to GuestOS.
+* Memory traces
+	* Controlling access to memory so that the shadowand primary structure remain coherent	* Common strategy: write-protect primary copies so that update operations cause page faults which can be caught, interpreted, and addressed
+
+## Aspects of VMMs
+
+### Full virtualization vs Para-virtualization
+
+#### Full virtualization:
+
+In full virtualization, the virtual machine simulates enough hardware to allow an unmodified "guest" OS (one designed for the same instruction set) to be run in isolation. 
+
+* Advantages: 
+	* Guest is unaware it is executing within a VM –  Guest OS need not be modified	* No hardware or OS assistance required	* Can run legacy OS
+* Disadvantages:
+	* Can be less efficient
+
+#### Para-virtualization
+
+In paravirtualization, the virtual machine does not necessarily simulate hardware, but instead (or in addition) offers a special API that can only be used by modifying the "guest" OS.
+
+* Advantages:
+	* Lower virtualisation overheads, so better performance
+* Disadvantages:
+	* Need to modify guest OS	* Can’t run arbitrary OS! –  Less portable	* Less compatibility
+
+> Because the guest OS needs to be modified, usually this kind of virtualization only support to run open source OSes as guest OSes. That's why XEN based VPS providers, such as Linode, only support Linux.
+
+### Hardware-assisted virtualization vs binary translation
+
+#### Hardware-assisted virtualization
+
+In hardware-assisted virtualization, the hardware provides architectural support that facilitates building a virtual machine monitor and allows guest OSes to be run in isolation.
+
+*	New processors typically have this*	Requires that all sensitive instructions trappable
+
+* Advantages:
+	* Good performance	* Easier to implement	* Advanced implementation supports hardware assisted DMA, memory virtualisation.
+* Disadvantages:
+	* Needs hardware support
+
+#### Binary translation
+
+Trap and execute occurs by scanning guest instruction stream and replacing sensitive instructions with emulated code.
+
+* Advantages:
+	* Guest OS need not be modified	* No hardware or OS assistance required	* Can run legacy OS
+* Disadvantages:
+	* Overheads	* Complicated	* Need to replace instructions “on-the- fly”
+
+### Bare Metal Hypervisor vs Hosted Virtualisation
+
+Bare Metal Hypervisor – VMM runs directly on actual hardware (e.g. VMWare ESX Server)
+
+Hosted Virtualisation – VMM runs on top of another operating system
+
+![](img/hypervisor.png)
+
+### Operating System Level Virtualisation
+
+Also called **"containers"**. The kernel of an operating system allows the existence of multiple ==isolated user-space instances==, instead of just one.
 
 # Linux Containers
 
