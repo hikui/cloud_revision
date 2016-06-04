@@ -149,6 +149,42 @@ Also called **"containers"**. The kernel of an operating system allows the exist
 
 ## Memory Virtualization
 
+## Live Migration
+
+![](img/live_migration.png)
+
+* Stage 0: Pre-Migration We begin with an active VM on
+physical host A. To speed any future migration, a target
+host may be preselected where the resources required
+to receive migration will be guaranteed.
+* Stage 1: Reservation A request is issued to migrate an OS
+from host A to host B. We initially confirm that the
+necessary resources are available on B and reserve a
+VM container of that size. Failure to secure resources
+here means that the VM simply continues to run on A
+unaffected.
+* Stage 2: Iterative Pre-Copy During the first iteration, all
+pages are transferred from A to B. Subsequent iterations
+copy only those pages dirtied during the previous
+transfer phase.
+* Stage 3: Stop-and-Copy We suspend the running OS instance
+at A and redirect its network traffic to B. As
+described earlier, CPU state and any remaining inconsistent
+memory pages are then transferred. At the end
+of this stage there is a consistent suspended copy of
+the VM at both A and B. The copy at A is still considered
+to be primary and is resumed in case of failure.
+* Stage 4: Commitment Host B indicates to A that it has
+successfully received a consistent OS image. Host A
+acknowledges this message as commitment of the migration
+transaction: host A may now discard the original
+VM, and host B becomes the primary host.
+* Stage 5: Activation The migrated VM on B is now activated.
+Post-migration code runs to reattach device
+drivers to the new machine and advertise moved IP
+addresses.
+
+[Live Migration of Virtual Machines](https://www.usenix.org/legacy/event/nsdi05/tech/full_papers/clark/clark.pdf)
 
 ## Further Reading
 
@@ -176,3 +212,7 @@ If you have to run many applications on the same machine, it issimpler to keep 
 Containers offer a way to ==isolate applications and related libraries/configurations from each other==. This is important because upgrading a single library can cause incompatibilities to appear in apparently unrelated applications.
 
 ## Docker
+
+* Docker is by far the most successful containerization technology to date.
+* It uses the Linux kernel (notably cgroups), and LXC technology.
+* Docker containers run slightly slower than native processes.
