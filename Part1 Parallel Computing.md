@@ -17,24 +17,50 @@ Types of parallel:
 
 ### Limitations:
 
-#### Amdahl's Law (modified)
+#### Amdahl's Law
 
-\\[
-    S(p) = \frac{p}{1+(p-1)\:f} \approx \frac{1}{f}
-\\]
+$$
+	T(1) = \sigma + \pi \quad \quad T(N) = \sigma + \frac{\pi}{N}
+$$
 
-$f$: fraction of work that cannot be parallelised.   
-$p$: number of processors.
+where $\sigma$ is the **amount of work** that cannot be parallelized; $\pi$ is the **amount of work** that can be parallelized. And $\sigma + \pi = 1$
 
-Meaning: if the **fraction** of serial work is fixed, then the speedup is limited.
+So we have speedup
+
+$$
+	S(N) = \frac{T(1)}{T(N)} = \frac{\pi + \sigma}{\sigma + \pi / N} = \frac{1+\pi/\sigma}{1+(\pi/\sigma)/N}
+$$
+
+let the **fraction of serial work** is $\alpha$, then the **fraction of parallelized work** is $1 - \alpha$
+
+then we have $\pi / \sigma = (1-\alpha)/\alpha$
+
+then we have
+
+$$
+	S(N) = \frac{1 + (1-\alpha)/\alpha}{1+(1-\alpha)/\alpha N} = \frac{1}{\alpha+(1-\alpha)/N} \approx \frac{1}{\alpha}
+$$
+
+Meaning: if the **fraction** of serial **work** is fixed and the problem size is fixed, then the speedup is limited.
+
+---
 
 #### Gustafson-Barsis's Law (calculaton???)
 
-\\[
+$$
+	T(1) = \sigma + N \pi \quad \quad T(N) = \sigma + \pi
+$$
+
+
+$$
 	S(N) = \alpha + N(1-\alpha) = N - \alpha (N-1)
-\\]
+$$
 
 $\alpha$: fraction of running time sequential program **speeds on** parallel parts.
+
+For example, a parallel program takes 120s to run, and the total time spend in the sequential part was 12s. Then $\alpha=12/120$
+
+---
 
 ### Approaches for Parallelism
 
