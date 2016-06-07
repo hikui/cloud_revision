@@ -10,7 +10,7 @@
 
 ## HDFS
 
-HDFS is the core of Hadoop. It's a fault tolerant file system that has been explicitly defined to span many computers.
+HDFS is the core of Hadoop. It's a ==fault tolerant== file system that has been explicitly defined to ==span many computers==.
 
 The block size of HDFS is 128MB. Reasons:
 

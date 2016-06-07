@@ -1,9 +1,10 @@
 # Terms
 
 * Single sign-on: allow users to access multiple services with a single login。
-* PKI: is a set of roles, policies, and procedures needed to create, manage, distribute, use, store, and revoke digital certificates and manage public-key encryption.
-* CA: is a trusted entity that issues electronic documents that verify a digital entity's identity on the Internet. 
-* Registration authority: is an authority in a network that verifies user requests for a digital certificate and tells the certificate authority (CA) to issue it. 
+* PKI: is a set of roles, policies, and procedures needed to create, manage, distribute, use, store, and revoke digital certificates and manage public-key encryption.   
+	![](img/PKI.png)
+* CA: is a ==trusted entity== that ==issues== electronic documents that verify a digital entity's identity on the Internet. 
+* Registration authority: is an authority in a network that ==verifies user requests== for a digital certificate and tells the certificate authority (CA) to issue it. 
 * Identity Provider: providing identifiers for users looking to interact with a system. (Facebook in SSO)
 
 # Authenticaton
@@ -30,19 +31,11 @@ Federated Identity (FID) refers to where the user stores their credentials. Alte
 
 ## Benefits
 
-> Copied from Wikipedia
-
-Ease of use: 
-
-* Reducing password fatigue from different user name and password combinations
-* Reducing time spent re-entering passwords for the same identity
+* Can delegate burden of identity to others* Allows for federated infrastructure, autonomous components* Easier to trust internally ­ orgs may not want to merge all their logins* Single sign on possible
 
 ## Drawbacks (Security problems)
 
-> Copied from Wikipedia
-
-* It increases the negative impact in case the ==credentials are available to other persons and misused==.
-* It makes the authentication systems highly critical; a loss of their availability can result in denial of access to all systems unified under the SSO. 
+* Harder to guarantee identity is well maintained by the identity provider* Harder to customise access from the identity provider to service provider (work with acommon, interface)
 
 ---
 

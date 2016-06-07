@@ -93,3 +93,23 @@ The difference between a cloud and a grid can be expressed as below:
       * how to move data/resources when needed
       * don't know when to burst into public and what data can go to public cloud
       * don't know public cloud compliant with PCI-DSS ( Payment Card Industry- Data Security Standard)
+
+# Practice
+
+## Deployment - virtual image vs scripting
+
+### Virtual image
+
+Deploying complex cloud system requires alot of moving parts
+
+* Easy to forget what software you installed and what steps you took to configure system.
+* Might be non-repeatable
+
+Virtual images are monolithic. (You don't have to recall what softwares to install, simply take a snapshot. But images can be large, space consuming.) Also they don't provide record of changing.
+
+### Scripting
+
+* Provides a record of what you did
+* codifies knowledge about system
+* make process repeatable.
+* make it programmable (but need to take more efforts)
