@@ -53,8 +53,13 @@ CA is a good solution when the cluster is co-located, less good when it is distr
 
 Has to distribute both data and processing over many nodes.
 
+Data: 
+
 * Reading and writing distributed datasets.
 * Preserving data in the presence of failing data nodes.
+
+Processing:
+
 * Supporting the execution of MapReduce tasks.
 * Being fault-tolerant.
 * Coordinating the execution of tasks across a cluster.

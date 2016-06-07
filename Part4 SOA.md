@@ -2,11 +2,13 @@
 
 ## Why SOA
 
-When components are distributed, function calls and object instantiations cannot always be used directly. Therefore, components have to interact in more loosely-coupled ways. *Services* are often used for this.
+When components are distributed, function calls and object instantiations cannot always be used directly. Therefore, components have to interact in ==more loosely-coupled ways==. *Services* are often used for this.
 
 Every system in a SOA should be considered as _autonomous_, but network-reachable and inter-operable through services.
 
 ## Core ideas
+
+![](img/soa_core.png)
 
 * A ==set of services== that a business wants to provide to their customers, partners, or other areas of an organizaiton
 * An architectural pattern that requires ==a service provider, mediaiton, and service requestor with a **service description**==
@@ -16,19 +18,21 @@ Every system in a SOA should be considered as _autonomous_, but network-reachabl
 
 ## SOA Principles
 
+![](img/SOA_principles.png)
+
 * Standardized service contract: Services adhere to a ==communications agreement==, as defined collectively by one or more service-description documents
 * Service loose coupling: Services maintain a relationship that minimizes dependencies and only requires that they ==maintain an awareness== of each other.
+* Service encapsulation: Many services are consolidated for use under a SOA. Often such services are not planned to be under a SOA.
 * Service abstraction: Beyond descriptions in the service contract, servies ==hide logic== from the outside world.
 * Service reusability: Logic is ==divided== into services with the ==intention of promoting reuse==.
 * Service autonomy: Service have control over the logic they encapsulate.
-* Service statelessness: Service minimise resource consumption by deferring the management of state information when necessary (HTTP).
 * Service discoverability: Service are supplemented with communicative meta data by which they can be effectively ==discovered and interpreted==.
+* Service statelessness: Service minimise resource consumption by deferring the management of state information when necessary (HTTP).
 * Service composability: Services are effective composition participants, regardless of the size and complexity of the composition.
 * Service granularity(粒度): A design consideration to provide optimal scope at the right ==granular level== of the business functionality in a service operation.
-* Service normalization: Services are decomposed and consolidated to alevel of normal form to ==minimize redundancy==. (In some cases they are denormalized for performance [same to database]).
+* Service normalization: Services are decomposed and consolidated to a level of normal form to ==minimize redundancy==. (In some cases they are denormalized for performance [same to database]).
 * Service optimization: High quality services are generally preferable to low-quality ones.
 * Service relevance: Functionality is presented at a granularity recognized by the user as a meaningful service.
-* Service encapsulation: Many services are consolidated for use under a SOA. Often such services are not planned to be under a SOA.
 * Service location transparency: The ability of a service consumer to invoke a service ==regardless of its actual location in the network.==
 
 ## SOAP/WS vs REST
@@ -39,7 +43,7 @@ Two different architectural design:
 
 * SOAP/WS is built on the paradigm of RPC; practically, a language independent function call that spans another system.
 * REST is centered around resources, and the way they can be manipulated (HTTP actions) remotely.
-* SOAP/WS is a stack of protocols that covers ==every aspect of using a remote service==, from service discovery to service description, to the actual request/response.
+* SOAP/WS is a stack of protocols that covers ==every aspect of using a remote service==, from service discovery to service description, to the actual request/response, while REST is an architectural style.
 
 ---
 
@@ -95,7 +99,7 @@ RESTful systems use a Uniform Interface[^UniformInterface].
 >
 > #### Identification of resources
 > 
-> Individual resources are identified in requests, for example using URIs in web-based REST systems. The resources themselves are conceptually separate from the representations that are returned to the client. For example, the server may send data from its database as HTML, XML or JSON, none of which are the server's internal representation.
+> Individual resources are identified in requests, for example using URIs in web-based REST systems. The resources themselves are conceptually ==separate from the representations== that are returned to the client. For example, the server may send data from its database as HTML, XML or JSON, none of which are the server's internal representation.
 >
 > #### Manipulation of resources through these representations
 > Each resource can have one or more representations. Such as `application/xml`, `application/json` etc. Clients and servers negotiate to select representation.

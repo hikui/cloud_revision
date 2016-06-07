@@ -1,3 +1,11 @@
+# Terms
+
+* Single sign-on: allow users to access multiple services with a single login。
+* PKI: is a set of roles, policies, and procedures needed to create, manage, distribute, use, store, and revoke digital certificates and manage public-key encryption.
+* CA: is a trusted entity that issues electronic documents that verify a digital entity's identity on the Internet. 
+* Registration authority: is an authority in a network that verifies user requests for a digital certificate and tells the certificate authority (CA) to issue it. 
+* Identity Provider: providing identifiers for users looking to interact with a system. (Facebook in SSO)
+
 # Authenticaton
 
 Authentication is the establishment and propagation of a user’s ==identity== in the system. (Prove who you are) (Doesn't check what user is allowed to do (this is achieved by authorization))

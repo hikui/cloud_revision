@@ -53,6 +53,8 @@ The difference between a cloud and a grid can be expressed as below:
 
 #### Essential Characteristics
 
+![](img/cloud_characteristics.png)
+
 * _On-demand_ self-service
 * Broad network access 
 * Resource pooling (don't have fixed set of resources)

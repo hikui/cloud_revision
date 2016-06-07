@@ -107,3 +107,8 @@ For example, a parallel program takes 120s to run, and the total time spend in t
 8. The netowrk is homogeneous
 9. The time is _ubiquitous_ (Because there is no global time)
 
+### Distributed System Challenges
+
+* Complexity of implementations
+	* Middleware bloat and lock-in	* Vision and challenges of reality* Vendor specific solutions
+* Scale of the problem area
