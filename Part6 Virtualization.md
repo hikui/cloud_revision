@@ -9,8 +9,8 @@
 * Virtual Machine: A ==representation of a real machine== using hardware/software that can host a guest operating system.
 * Guest Operating System: An operating system that runs in a virtual machine environment that would otherwise run directly on a separate physical system.
 
-![](img/hmm_vmware.png)
-*The user interface of a HMM (VMWare Fusion)*
+![](img/vmm_vmware.png)
+*The user interface of a VMM (VMWare Fusion)*
 
 ## Background Knowledge
 

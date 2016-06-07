@@ -15,7 +15,7 @@ Types of parallel:
 * widely distributed clusters of machines ???
 * hibrid
 
-### Limitations:
+## Limitations:
 
 #### Amdahl's Law
 
@@ -91,7 +91,7 @@ For example, a parallel program takes 120s to run, and the total time spend in t
 	![](./img/dividenconquer.png)
 	* A problem is divided into two or more sub problems. Each of these sub problems are solved independently and their results are combined
 	* 3 operations: split, compute and join
-	* Master-worker is kike divide and conqure with master doing both split and join
+	* Master-worker is like divide and conqure with master doing both split and join
 * Speculation: very complex, can't understand...
 * Parametric Computation: never seen in the slides
 
