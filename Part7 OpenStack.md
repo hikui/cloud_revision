@@ -11,6 +11,7 @@
 ## Terminologies
 
 ### Volume Store (Clinder in OpenStack, EBS in AWS)
+
 Block-level storage volumes that can be attach to a running instance. It behaves like a raw, unformatted, external block device (hard drive).
 
 ### Object Storage (Swift in OpenStack, S3 in AWS)

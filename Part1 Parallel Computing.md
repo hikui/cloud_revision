@@ -97,6 +97,8 @@ For example, a parallel program takes 120s to run, and the total time spend in t
 
 ### Erroneous Assumptions of Distributed Systems (Problems that hard to deal with)
 
+![](img/erroneous_assumptions.png)
+
 1. The network is reliable
 2. Latency is zero
 3. Bandwidth is infinite

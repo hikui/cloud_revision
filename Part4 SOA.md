@@ -60,7 +60,7 @@ https://www.infoq.com/articles/rest-soap-when-to-use-each
 3. This puts the client in a certain ==state==.
 4. Representation contains URLs ==allowing navigation==.
 5. Client follows URL to fetch another resource.
-6. Thes transitions client into another state.
+6. This transitions client into another state.
 
 ### HATEOAS
 

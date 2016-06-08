@@ -4,7 +4,7 @@
 
 * Virtual machine monitor / Hypervisor   
 	The virtualisation layer between the underlying hardware (e.g. the physical server) and the virtual machines and guest operating systems it supports.
-	* The environment of the VM should appear to be the same as the physical machine	* Minor ==decrease in performance only==	* Appears as though in control of system resources
+	* The environment of the VM should appear to be the same as the physical machine	* Minor decrease in performance only	* Appears as though in control of system resources
 
 * Virtual Machine: A ==representation of a real machine== using hardware/software that can host a guest operating system.
 * Guest Operating System: An operating system that runs in a virtual machine environment that would otherwise run directly on a separate physical system.

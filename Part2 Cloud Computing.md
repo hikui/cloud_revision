@@ -63,18 +63,24 @@ The difference between a cloud and a grid can be expressed as below:
 
 ### Deployment models
 
+![](img/procon_public_clouds.png)
+
 * Public clouds
 	* pros
-		* utility computing
+		* utility computing   
+			提供服务的模型，在这个模型里服务提供商提供客户需要的计算资源和基础设施管理，并根据应用所占用的资源情况进行计费，而不是仅仅按照速率进行收费。
 		* (users can) focus on core business
 		* cost-effective
 		* right sizing
-		* democratisation of computing???
+		* democratisation of computing (Users decide what service they want)
 	* cons
 		* security
 		* loss of control
 		* possible lock-in
 		* dependency of cloud provider continued existence
+
+![](img/procon_private_clouds.png)
+
 * Private clouds
    * pros  
       * Control

@@ -7,9 +7,27 @@
 * Registration authority: is an authority in a network that ==verifies user requests== for a digital certificate and tells the certificate authority (CA) to issue it. 
 * Identity Provider: providing identifiers for users looking to interact with a system. (Facebook in SSO)
 
+# Security Challenges
+
+![](img/security_challenges.png)
+
+## Technical
+
+* Authentication
+* Authorization
+* Audit/accounting
+* Confidentiality
+* Privacy
+* Trust
+* Fabric management
+
+## Non-technical
+
+* Need to support security that scales* Avoid inventing specialised security, make it generic, easily to apply* Inter­organisational security	* Restrict access to certain users	* Changing policies over time	* Sharing resources with noisy neighbours
+
 # Authenticaton
 
-Authentication is the establishment and propagation of a user’s ==identity== in the system. (Prove who you are) (Doesn't check what user is allowed to do (this is achieved by authorization))
+Authentication is ==the establishment and propagation== of a user’s ==identity== in the system. (Prove who you are) (Doesn't check what user is allowed to do (this is achieved by authorization))
 
 Traditionally: username / password
 
@@ -31,11 +49,15 @@ Federated Identity (FID) refers to where the user stores their credentials. Alte
 
 ## Benefits
 
-* Can delegate burden of identity to others* Allows for federated infrastructure, autonomous components* Easier to trust internally ­ orgs may not want to merge all their logins* Single sign on possible
+* simple for users, single password, single sign-on to web-based resources
+* standardised
 
 ## Drawbacks (Security problems)
 
-* Harder to guarantee identity is well maintained by the identity provider* Harder to customise access from the identity provider to service provider (work with acommon, interface)
+* policy/attributes statically agreed across federation
+* no finer grained access control
+* only for academics (Shib)
+* trust
 
 ---
 
