@@ -1,0 +1,817 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<meta charset="utf-8">
+<title>Part6 Virtualization</title>
+
+
+<style type="text/css">
+body {
+  font-family: Helvetica, arial, sans-serif;
+  font-size: 14px;
+  line-height: 1.6;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  background-color: white;
+  padding: 30px; }
+
+body > *:first-child {
+  margin-top: 0 !important; }
+body > *:last-child {
+  margin-bottom: 0 !important; }
+
+a {
+  color: #4183C4; }
+a.absent {
+  color: #cc0000; }
+a.anchor {
+  display: block;
+  padding-left: 30px;
+  margin-left: -30px;
+  cursor: pointer;
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0; }
+
+h1, h2, h3, h4, h5, h6 {
+  margin: 20px 0 10px;
+  padding: 0;
+  font-weight: bold;
+  -webkit-font-smoothing: antialiased;
+  cursor: text;
+  position: relative; }
+
+h1:hover a.anchor, h2:hover a.anchor, h3:hover a.anchor, h4:hover a.anchor, h5:hover a.anchor, h6:hover a.anchor {
+  background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA09pVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMy1jMDExIDY2LjE0NTY2MSwgMjAxMi8wMi8wNi0xNDo1NjoyNyAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNiAoMTMuMCAyMDEyMDMwNS5tLjQxNSAyMDEyLzAzLzA1OjIxOjAwOjAwKSAgKE1hY2ludG9zaCkiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6OUM2NjlDQjI4ODBGMTFFMTg1ODlEODNERDJBRjUwQTQiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6OUM2NjlDQjM4ODBGMTFFMTg1ODlEODNERDJBRjUwQTQiPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDo5QzY2OUNCMDg4MEYxMUUxODU4OUQ4M0REMkFGNTBBNCIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDo5QzY2OUNCMTg4MEYxMUUxODU4OUQ4M0REMkFGNTBBNCIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/PsQhXeAAAABfSURBVHjaYvz//z8DJYCRUgMYQAbAMBQIAvEqkBQWXI6sHqwHiwG70TTBxGaiWwjCTGgOUgJiF1J8wMRAIUA34B4Q76HUBelAfJYSA0CuMIEaRP8wGIkGMA54bgQIMACAmkXJi0hKJQAAAABJRU5ErkJggg==) no-repeat 10px center;
+  text-decoration: none; }
+
+h1 tt, h1 code {
+  font-size: inherit; }
+
+h2 tt, h2 code {
+  font-size: inherit; }
+
+h3 tt, h3 code {
+  font-size: inherit; }
+
+h4 tt, h4 code {
+  font-size: inherit; }
+
+h5 tt, h5 code {
+  font-size: inherit; }
+
+h6 tt, h6 code {
+  font-size: inherit; }
+
+h1 {
+  font-size: 28px;
+  color: black; }
+
+h2 {
+  font-size: 24px;
+  border-bottom: 1px solid #cccccc;
+  color: black; }
+
+h3 {
+  font-size: 18px; }
+
+h4 {
+  font-size: 16px; }
+
+h5 {
+  font-size: 14px; }
+
+h6 {
+  color: #777777;
+  font-size: 14px; }
+
+p, blockquote, ul, ol, dl, li, table, pre {
+  margin: 15px 0; }
+
+hr {
+  background: transparent url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAYAAAAECAYAAACtBE5DAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyJpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNSBNYWNpbnRvc2giIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6OENDRjNBN0E2NTZBMTFFMEI3QjRBODM4NzJDMjlGNDgiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6OENDRjNBN0I2NTZBMTFFMEI3QjRBODM4NzJDMjlGNDgiPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDo4Q0NGM0E3ODY1NkExMUUwQjdCNEE4Mzg3MkMyOUY0OCIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDo4Q0NGM0E3OTY1NkExMUUwQjdCNEE4Mzg3MkMyOUY0OCIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/PqqezsUAAAAfSURBVHjaYmRABcYwBiM2QSA4y4hNEKYDQxAEAAIMAHNGAzhkPOlYAAAAAElFTkSuQmCC) repeat-x 0 0;
+  border: 0 none;
+  color: #cccccc;
+  height: 4px;
+  padding: 0;
+}
+
+body > h2:first-child {
+  margin-top: 0;
+  padding-top: 0; }
+body > h1:first-child {
+  margin-top: 0;
+  padding-top: 0; }
+  body > h1:first-child + h2 {
+    margin-top: 0;
+    padding-top: 0; }
+body > h3:first-child, body > h4:first-child, body > h5:first-child, body > h6:first-child {
+  margin-top: 0;
+  padding-top: 0; }
+
+a:first-child h1, a:first-child h2, a:first-child h3, a:first-child h4, a:first-child h5, a:first-child h6 {
+  margin-top: 0;
+  padding-top: 0; }
+
+h1 p, h2 p, h3 p, h4 p, h5 p, h6 p {
+  margin-top: 0; }
+
+li p.first {
+  display: inline-block; }
+li {
+  margin: 0; }
+ul, ol {
+  padding-left: 30px; }
+
+ul :first-child, ol :first-child {
+  margin-top: 0; }
+
+dl {
+  padding: 0; }
+  dl dt {
+    font-size: 14px;
+    font-weight: bold;
+    font-style: italic;
+    padding: 0;
+    margin: 15px 0 5px; }
+    dl dt:first-child {
+      padding: 0; }
+    dl dt > :first-child {
+      margin-top: 0; }
+    dl dt > :last-child {
+      margin-bottom: 0; }
+  dl dd {
+    margin: 0 0 15px;
+    padding: 0 15px; }
+    dl dd > :first-child {
+      margin-top: 0; }
+    dl dd > :last-child {
+      margin-bottom: 0; }
+
+blockquote {
+  border-left: 4px solid #dddddd;
+  padding: 0 15px;
+  color: #777777; }
+  blockquote > :first-child {
+    margin-top: 0; }
+  blockquote > :last-child {
+    margin-bottom: 0; }
+
+table {
+  padding: 0;border-collapse: collapse; }
+  table tr {
+    border-top: 1px solid #cccccc;
+    background-color: white;
+    margin: 0;
+    padding: 0; }
+    table tr:nth-child(2n) {
+      background-color: #f8f8f8; }
+    table tr th {
+      font-weight: bold;
+      border: 1px solid #cccccc;
+      margin: 0;
+      padding: 6px 13px; }
+    table tr td {
+      border: 1px solid #cccccc;
+      margin: 0;
+      padding: 6px 13px; }
+    table tr th :first-child, table tr td :first-child {
+      margin-top: 0; }
+    table tr th :last-child, table tr td :last-child {
+      margin-bottom: 0; }
+
+img {
+  max-width: 100%; }
+
+span.frame {
+  display: block;
+  overflow: hidden; }
+  span.frame > span {
+    border: 1px solid #dddddd;
+    display: block;
+    float: left;
+    overflow: hidden;
+    margin: 13px 0 0;
+    padding: 7px;
+    width: auto; }
+  span.frame span img {
+    display: block;
+    float: left; }
+  span.frame span span {
+    clear: both;
+    color: #333333;
+    display: block;
+    padding: 5px 0 0; }
+span.align-center {
+  display: block;
+  overflow: hidden;
+  clear: both; }
+  span.align-center > span {
+    display: block;
+    overflow: hidden;
+    margin: 13px auto 0;
+    text-align: center; }
+  span.align-center span img {
+    margin: 0 auto;
+    text-align: center; }
+span.align-right {
+  display: block;
+  overflow: hidden;
+  clear: both; }
+  span.align-right > span {
+    display: block;
+    overflow: hidden;
+    margin: 13px 0 0;
+    text-align: right; }
+  span.align-right span img {
+    margin: 0;
+    text-align: right; }
+span.float-left {
+  display: block;
+  margin-right: 13px;
+  overflow: hidden;
+  float: left; }
+  span.float-left span {
+    margin: 13px 0 0; }
+span.float-right {
+  display: block;
+  margin-left: 13px;
+  overflow: hidden;
+  float: right; }
+  span.float-right > span {
+    display: block;
+    overflow: hidden;
+    margin: 13px auto 0;
+    text-align: right; }
+
+code, tt {
+  margin: 0 2px;
+  padding: 0 5px;
+  white-space: nowrap;
+  border: 1px solid #eaeaea;
+  background-color: #f8f8f8;
+  border-radius: 3px; }
+
+pre code {
+  margin: 0;
+  padding: 0;
+  white-space: pre;
+  border: none;
+  background: transparent; }
+
+.highlight pre {
+  background-color: #f8f8f8;
+  border: 1px solid #cccccc;
+  font-size: 13px;
+  line-height: 19px;
+  overflow: auto;
+  padding: 6px 10px;
+  border-radius: 3px; }
+
+pre {
+  background-color: #f8f8f8;
+  border: 1px solid #cccccc;
+  font-size: 13px;
+  line-height: 19px;
+  overflow: auto;
+  padding: 6px 10px;
+  border-radius: 3px; }
+  pre code, pre tt {
+    background-color: transparent;
+    border: none; }
+
+sup {
+    font-size: 0.83em;
+    vertical-align: super;
+    line-height: 0;
+}
+* {
+	-webkit-print-color-adjust: exact;
+}
+@media screen and (min-width: 914px) {
+    body {
+        width: 854px;
+        margin:0 auto;
+    }
+}
+@media print {
+	table, pre {
+		page-break-inside: avoid;
+	}
+	pre {
+		word-wrap: break-word;
+	}
+}
+</style>
+
+<style type="text/css">
+/**
+ * prism.js default theme for JavaScript, CSS and HTML
+ * Based on dabblet (http://dabblet.com)
+ * @author Lea Verou
+ */
+
+code[class*="language-"],
+pre[class*="language-"] {
+	color: black;
+	background: none;
+	text-shadow: 0 1px white;
+	font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+	text-align: left;
+	white-space: pre;
+	word-spacing: normal;
+	word-break: normal;
+	word-wrap: normal;
+	line-height: 1.5;
+
+	-moz-tab-size: 4;
+	-o-tab-size: 4;
+	tab-size: 4;
+
+	-webkit-hyphens: none;
+	-moz-hyphens: none;
+	-ms-hyphens: none;
+	hyphens: none;
+}
+
+pre[class*="language-"]::-moz-selection, pre[class*="language-"] ::-moz-selection,
+code[class*="language-"]::-moz-selection, code[class*="language-"] ::-moz-selection {
+	text-shadow: none;
+	background: #b3d4fc;
+}
+
+pre[class*="language-"]::selection, pre[class*="language-"] ::selection,
+code[class*="language-"]::selection, code[class*="language-"] ::selection {
+	text-shadow: none;
+	background: #b3d4fc;
+}
+
+@media print {
+	code[class*="language-"],
+	pre[class*="language-"] {
+		text-shadow: none;
+	}
+}
+
+/* Code blocks */
+pre[class*="language-"] {
+	padding: 1em;
+	margin: .5em 0;
+	overflow: auto;
+}
+
+:not(pre) > code[class*="language-"],
+pre[class*="language-"] {
+	background: #f5f2f0;
+}
+
+/* Inline code */
+:not(pre) > code[class*="language-"] {
+	padding: .1em;
+	border-radius: .3em;
+	white-space: normal;
+}
+
+.token.comment,
+.token.prolog,
+.token.doctype,
+.token.cdata {
+	color: slategray;
+}
+
+.token.punctuation {
+	color: #999;
+}
+
+.namespace {
+	opacity: .7;
+}
+
+.token.property,
+.token.tag,
+.token.boolean,
+.token.number,
+.token.constant,
+.token.symbol,
+.token.deleted {
+	color: #905;
+}
+
+.token.selector,
+.token.attr-name,
+.token.string,
+.token.char,
+.token.builtin,
+.token.inserted {
+	color: #690;
+}
+
+.token.operator,
+.token.entity,
+.token.url,
+.language-css .token.string,
+.style .token.string {
+	color: #a67f59;
+	background: hsla(0, 0%, 100%, .5);
+}
+
+.token.atrule,
+.token.attr-value,
+.token.keyword {
+	color: #07a;
+}
+
+.token.function {
+	color: #DD4A68;
+}
+
+.token.regex,
+.token.important,
+.token.variable {
+	color: #e90;
+}
+
+.token.important,
+.token.bold {
+	font-weight: bold;
+}
+.token.italic {
+	font-style: italic;
+}
+
+.token.entity {
+	cursor: help;
+}
+</style>
+
+<style type="text/css">
+pre.line-numbers {
+	position: relative;
+	padding-left: 3.8em;
+	counter-reset: linenumber;
+}
+
+pre.line-numbers > code {
+	position: relative;
+}
+
+.line-numbers .line-numbers-rows {
+	position: absolute;
+	pointer-events: none;
+	top: 0;
+	font-size: 100%;
+	left: -3.8em;
+	width: 3em; /* works for line-numbers below 1000 lines */
+	letter-spacing: -1px;
+	border-right: 1px solid #999;
+
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+
+}
+
+	.line-numbers-rows > span {
+		pointer-events: none;
+		display: block;
+		counter-increment: linenumber;
+	}
+
+		.line-numbers-rows > span:before {
+			content: counter(linenumber);
+			color: #999;
+			display: block;
+			padding-right: 0.8em;
+			text-align: right;
+		}
+</style>
+
+
+</head>
+
+<body>
+
+<h1 id="toc_0">Virtualization</h1>
+
+<h2 id="toc_1">Terminology</h2>
+
+<ul>
+<li><p>Virtual machine monitor / Hypervisor<br>
+The virtualisation layer between the underlying hardware (e.g. the physical server) and the virtual machines and guest operating systems it supports.</p>
+
+<ul>
+<li>The environment of the VM should appear to be the same as the physical machine</li>
+<li>Minor decrease in performance only</li>
+<li>Appears as though in control of system resources</li>
+</ul></li>
+<li><p>Virtual Machine: A <mark>representation of a real machine</mark> using hardware/software that can host a guest operating system.</p></li>
+<li><p>Guest Operating System: An operating system that runs in a virtual machine environment that would otherwise run directly on a separate physical system.</p></li>
+</ul>
+
+<p><img src="img/vmm_vmware.png" alt="">
+<em>The user interface of a VMM (VMWare Fusion)</em></p>
+
+<h2 id="toc_2">Background Knowledge</h2>
+
+<h3 id="toc_3">Processor modes</h3>
+
+<p>A processor in a computer running a typical OS has two different modes: user mode and kernel mode. The processor switches between the two modes depending on what type of code is running on the processor. Applications run in user mode, and core operating system components run in kernel mode. While many drivers run in kernel mode, some drivers may run in user mode.</p>
+
+<h4 id="toc_4">Kernel Mode</h4>
+
+<p>In Kernel mode, the executing code <mark>has complete and unrestricted access to the underlying hardware</mark>. It can execute <strong>any</strong> CPU instruction and reference <strong>any memory address</strong>. Kernel mode is generally reserved for the lowest-level, most trusted functions of the operating system. Crashes in kernel mode are catastrophic; they will <mark>halt the entire PC</mark>.</p>
+
+<h4 id="toc_5">User Mode</h4>
+
+<p>In User mode, the executing code has <mark>no ability to directly access hardware or reference memory</mark>. Code running in user mode must <mark>delegate to system APIs to access hardware or memory</mark>. Due to the protection afforded by this sort of isolation, crashes in user mode are always recoverable. Most of the code running on your computer will execute in user mode.</p>
+
+<p><img src="img/cpumode.png" alt=""></p>
+
+<hr>
+
+<h3 id="toc_6">Protection rings (Privilege rings)</h3>
+
+<p><img src="img/Priv_rings.png" alt=""></p>
+
+<p>Computer operating systems provide different levels of access to resources. A protection ring is one of two or more hierarchical levels or layers of privilege within the architecture of a computer system. This is generally hardware-enforced by some CPU architectures that provide different <mark>CPU modes</mark> at the hardware or microcode level. Rings are arranged in a hierarchy from most privileged (most trusted, usually numbered zero) to least privileged (least trusted, usually with the highest ring number). On most operating systems, <mark>Ring 0 is the level with the most privileges and interacts most directly with the physical hardware such as the CPU and memory</mark>.</p>
+
+<hr>
+
+<h3 id="toc_7">Classification of instructions</h3>
+
+<blockquote>
+<p>&#39;Instructions&#39; means CPU instructions. Please see assembly language to learn more about instructions. <a href="https://en.wikipedia.org/wiki/X86_instruction_listings">Here is the instrction set of x86</a>.</p>
+</blockquote>
+
+<ul>
+<li>Privileged Instructions:<br>
+instructions that trap if the processor is in user mode and do not trap in kernel mode.</li>
+<li>Sensitive Instructions:<br>
+instructions whose behaviour depends on the mode or configuration of the hardware. Different behaviours depending on whether in user or kernel mode.</li>
+<li><strong>Innocuous</strong> Instructions: instructions that are neither privileged nor sensitive –  Read data, add numbers etc.</li>
+</ul>
+
+<h4 id="toc_8">Intel Privileged and Sensitive Instructions (optional)</h4>
+
+<p>The Intel architecture defines <q>privileged</q> instructions and <q>sensitive</q> instructions. The privileged instructions may <mark>only be executed when the Current Privilege Level is zero (CPL = 0)</mark>. Attempting to execute a privileged instruction when CPL != 0 <mark>will generate a general protection (GP) exception</mark>. Windows traps GP exceptions caused by executing privileged instructions and usually generates an application error. </p>
+
+<p>The sensitive instructions (also called IOPL-sensitive) may only be executed when CPL &lt;= IOPL (I/O Privilege Level). Attempting to execute a sensitive instruction when CPL &gt; IOPL will generate a GP exception. This should usually not cause a fatal error. The Windows Virtual Machine Manager <mark>(VMM) traps GP exceptions caused by executing sensitive instructions and (depending on the instruction) either simulates the instruction&#39;s behavior in the VM in which the instruction was executed, or dispaches it to a virtual device driver, which simulates the instruction&#39;s behavior</mark> (trap and emulate). </p>
+
+<hr>
+
+<h3 id="toc_9">Popek and Goldberg Theorem</h3>
+
+<p>For any conventional third-generation computer, an effective VMM may be constructed if the set of sensitive instructions for that computer is a subset of the set of privileged instructions.</p>
+
+<blockquote>
+<p>Some architectures, like the non-hardware-assisted x86, do not meet these conditions, so they cannot be virtualized in the classic way. But architectures can still be fully virtualized (in the x86 case meaning at the CPU and MMU level) by using different techniques like <u>binary translation</u>, which replaces the sensitive instructions that do not generate traps, which are sometimes called critical instructions.</p>
+</blockquote>
+
+<h2 id="toc_10">Properties of interest</h2>
+
+<p>There are three properties of interest when analyzing the environment created by a VMM.</p>
+
+<ul>
+<li>Equivalence / Fidelity<br>
+A program running under the VMM should exhibit a behavior essentially identical to that demonstrated when running on an equivalent machine directly.</li>
+<li>Resource control / Safety<br>
+The VMM must be in complete control of the virtualized resources.</li>
+<li>Efficiency / Performance<br>
+A statistically dominant fraction of machine instructions must be executed without VMM intervention.</li>
+</ul>
+
+<h2 id="toc_11">Typical virtualization strategy</h2>
+
+<p>Trap-and-emulate</p>
+
+<p><img src="img/trap_and_emulate.png" alt=""></p>
+
+<h3 id="toc_12">VMM needs to support:</h3>
+
+<ul>
+<li>De-privileging<br>
+
+<ul>
+<li>VMM emulates the effect on system/hardware resources of privileged instructions whose execution traps into the VMM. aka trap-and-emulate.</li>
+<li>Typically achieved by running GuestOS at a lower hardware priority level than the VMM.</li>
+</ul></li>
+<li>Primary/shadow structures
+
+<ul>
+<li>VMM maintains “shadow” copies of critical structures whose “primary” versions are manipulated by the GuestOS, e.g. memory page tables.</li>
+<li>Primary copies needed to insure correct versions are visible to GuestOS.</li>
+</ul></li>
+<li>Memory traces
+
+<ul>
+<li>Controlling access to memory so that the shadow
+and primary structure remain coherent</li>
+<li>Common strategy: write-protect primary copies so that update operations cause page faults which can be caught, interpreted, and addressed</li>
+</ul></li>
+</ul>
+
+<h2 id="toc_13">Aspects of VMMs</h2>
+
+<h3 id="toc_14">Full virtualization vs Para-virtualization</h3>
+
+<h4 id="toc_15">Full virtualization:</h4>
+
+<p>In full virtualization, the virtual machine simulates enough hardware to allow an unmodified <q>guest</q> OS (one designed for the same instruction set) to be run in isolation. </p>
+
+<ul>
+<li>Advantages: 
+
+<ul>
+<li>Guest is unaware it is executing within a VM –  Guest OS need not be modified</li>
+<li>No hardware or OS assistance required</li>
+<li>Can run legacy OS</li>
+</ul></li>
+<li>Disadvantages:
+
+<ul>
+<li>Can be less efficient</li>
+</ul></li>
+</ul>
+
+<h4 id="toc_16">Para-virtualization</h4>
+
+<p>In paravirtualization, the virtual machine does not necessarily simulate hardware, but instead (or in addition) offers a special API that can only be used by modifying the <q>guest</q> OS.</p>
+
+<ul>
+<li>Advantages:
+
+<ul>
+<li>Lower virtualisation overheads, so better performance</li>
+</ul></li>
+<li>Disadvantages:
+
+<ul>
+<li>Need to modify guest OS</li>
+<li>Can’t run arbitrary OS! –  Less portable</li>
+<li>Less compatibility</li>
+</ul></li>
+</ul>
+
+<blockquote>
+<p>Because the guest OS needs to be modified, usually this kind of virtualization only support to run open source OSes as guest OSes. That&#39;s why XEN based VPS providers, such as Linode, only support Linux.</p>
+</blockquote>
+
+<h3 id="toc_17">Hardware-assisted virtualization vs binary translation</h3>
+
+<h4 id="toc_18">Hardware-assisted virtualization</h4>
+
+<p>In hardware-assisted virtualization, the hardware provides architectural support that facilitates building a virtual machine monitor and allows guest OSes to be run in isolation.</p>
+
+<ul>
+<li>  New processors typically have this</li>
+<li><p>Requires that all sensitive instructions trappable</p></li>
+<li><p>Advantages:</p>
+
+<ul>
+<li>Good performance</li>
+<li>Easier to implement</li>
+<li>Advanced implementation supports hardware assisted DMA, memory virtualisation.</li>
+</ul></li>
+<li><p>Disadvantages:</p>
+
+<ul>
+<li>Needs hardware support</li>
+</ul></li>
+</ul>
+
+<h4 id="toc_19">Binary translation</h4>
+
+<p>Trap and execute occurs by scanning guest instruction stream and replacing sensitive instructions with emulated code.</p>
+
+<ul>
+<li>Advantages:
+
+<ul>
+<li>Guest OS need not be modified</li>
+<li>No hardware or OS assistance required</li>
+<li>Can run legacy OS</li>
+</ul></li>
+<li>Disadvantages:
+
+<ul>
+<li>Overheads</li>
+<li>Complicated</li>
+<li>Need to replace instructions “on-the- fly”</li>
+</ul></li>
+</ul>
+
+<h3 id="toc_20">Bare Metal Hypervisor vs Hosted Virtualisation</h3>
+
+<p>Bare Metal Hypervisor – VMM runs directly on actual hardware (e.g. VMWare ESX Server)</p>
+
+<p>Hosted Virtualisation – VMM runs on top of another operating system</p>
+
+<p><img src="img/hypervisor.png" alt=""></p>
+
+<h3 id="toc_21">Operating System Level Virtualisation</h3>
+
+<p>Also called <strong><q>containers</q></strong>. The kernel of an operating system allows the existence of multiple <mark>isolated user-space instances</mark>, instead of just one.</p>
+
+<h2 id="toc_22">Memory Virtualization</h2>
+
+<h2 id="toc_23">Live Migration</h2>
+
+<p><img src="img/live_migration.png" alt=""></p>
+
+<ul>
+<li><strong>Stage 0: Pre-Migration</strong> We begin with an active VM on
+physical host A. To speed any future migration, a <mark>target
+host</mark> may be preselected where the <mark>resources</mark> required
+to receive migration will be <mark>guaranteed</mark>.</li>
+<li><strong>Stage 1: Reservation</strong> A request is issued to migrate an OS
+from host A to host B. We initially <mark>confirm</mark> that the
+necessary <mark>resources are available on B</mark> and <mark>reserve a
+VM container of that size</mark>. Failure to secure resources
+here means that the VM simply continues to run on A
+unaffected.</li>
+<li><strong>Stage 2: Iterative Pre-Copy</strong> During the first iteration, <mark>all
+pages</mark> are transferred from A to B. Subsequent iterations
+copy only those pages <mark>dirtied during the previous
+transfer phase</mark>.</li>
+<li><strong>Stage 3: Stop-and-Copy</strong> We suspend the running OS instance
+at A and <mark>redirect its network traffic to B</mark>. As
+described earlier, CPU state and any <mark>remaining inconsistent
+memory pages are then transferred</mark>. At the end
+of this stage there is a consistent suspended copy of
+the VM at both A and B. The copy at A is still considered
+to be primary and is resumed in case of failure.</li>
+<li><strong>Stage 4: Commitment</strong> Host B indicates to A that it has
+successfully received a consistent OS image. Host A
+acknowledges this message as commitment of the migration
+transaction: host A may now discard the original
+VM, and host B becomes the primary host.</li>
+<li><strong>Stage 5: Activation</strong> The migrated VM on B is now activated.
+Post-migration code runs to reattach device
+drivers to the new machine and advertise moved IP
+addresses.</li>
+</ul>
+
+<p><a href="https://www.usenix.org/legacy/event/nsdi05/tech/full_papers/clark/clark.pdf">Live Migration of Virtual Machines</a></p>
+
+<h2 id="toc_24">Further Reading</h2>
+
+<p><a href="http://kb.enterprisevpssolutions.com/know-the-difference-between-vmware-kvm-openvz-xen-virtuozzo/">
+Know the Difference between VMWare, KVM, OpenVZ, Xen, Virtuozzo</a></p>
+
+<h1 id="toc_25">Linux Containers</h1>
+
+<p>Problems of virtualization: cost resources. The cost in terms of disk and RAM of replicating an entire operating system can be huge.</p>
+
+<p><img src="img/vm_stack.png" alt="">
+<em>Virtualization architecture</em></p>
+
+<p><img src="img/container_stack.png" alt="">
+<em>Containerization architecture</em></p>
+
+<h2 id="toc_26">VM vs Containers</h2>
+
+<p><img src="img/vm_container_comp.png" alt=""></p>
+
+<h2 id="toc_27">When to use containers? Why are containers important?</h2>
+
+<p>If you have to run many applications on the same machine, it is
+simpler to keep them separated in different containers.</p>
+
+<p>Containers offer a way to <mark>isolate applications and related libraries/configurations from each other</mark>. This is important because upgrading a single library can cause incompatibilities to appear in apparently unrelated applications.</p>
+
+<h2 id="toc_28">Docker</h2>
+
+<ul>
+<li>Docker is by far the most successful containerization technology to date.</li>
+<li>It uses the Linux kernel (notably cgroups), and LXC technology.</li>
+<li>Docker containers run slightly slower than native processes.</li>
+</ul>
+
+
+
+<script type="text/javascript">
+var _self="undefined"!=typeof window?window:"undefined"!=typeof WorkerGlobalScope&&self instanceof WorkerGlobalScope?self:{},Prism=function(){var e=/\blang(?:uage)?-(\w+)\b/i,t=0,n=_self.Prism={util:{encode:function(e){return e instanceof a?new a(e.type,n.util.encode(e.content),e.alias):"Array"===n.util.type(e)?e.map(n.util.encode):e.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/\u00a0/g," ")},type:function(e){return Object.prototype.toString.call(e).match(/\[object (\w+)\]/)[1]},objId:function(e){return e.__id||Object.defineProperty(e,"__id",{value:++t}),e.__id},clone:function(e){var t=n.util.type(e);switch(t){case"Object":var a={};for(var r in e)e.hasOwnProperty(r)&&(a[r]=n.util.clone(e[r]));return a;case"Array":return e.map&&e.map(function(e){return n.util.clone(e)})}return e}},languages:{extend:function(e,t){var a=n.util.clone(n.languages[e]);for(var r in t)a[r]=t[r];return a},insertBefore:function(e,t,a,r){r=r||n.languages;var l=r[e];if(2==arguments.length){a=arguments[1];for(var i in a)a.hasOwnProperty(i)&&(l[i]=a[i]);return l}var o={};for(var s in l)if(l.hasOwnProperty(s)){if(s==t)for(var i in a)a.hasOwnProperty(i)&&(o[i]=a[i]);o[s]=l[s]}return n.languages.DFS(n.languages,function(t,n){n===r[e]&&t!=e&&(this[t]=o)}),r[e]=o},DFS:function(e,t,a,r){r=r||{};for(var l in e)e.hasOwnProperty(l)&&(t.call(e,l,e[l],a||l),"Object"!==n.util.type(e[l])||r[n.util.objId(e[l])]?"Array"!==n.util.type(e[l])||r[n.util.objId(e[l])]||(r[n.util.objId(e[l])]=!0,n.languages.DFS(e[l],t,l,r)):(r[n.util.objId(e[l])]=!0,n.languages.DFS(e[l],t,null,r)))}},plugins:{},highlightAll:function(e,t){var a={callback:t,selector:'code[class*="language-"], [class*="language-"] code, code[class*="lang-"], [class*="lang-"] code'};n.hooks.run("before-highlightall",a);for(var r,l=a.elements||document.querySelectorAll(a.selector),i=0;r=l[i++];)n.highlightElement(r,e===!0,a.callback)},highlightElement:function(t,a,r){for(var l,i,o=t;o&&!e.test(o.className);)o=o.parentNode;o&&(l=(o.className.match(e)||[,""])[1],i=n.languages[l]),t.className=t.className.replace(e,"").replace(/\s+/g," ")+" language-"+l,o=t.parentNode,/pre/i.test(o.nodeName)&&(o.className=o.className.replace(e,"").replace(/\s+/g," ")+" language-"+l);var s=t.textContent,u={element:t,language:l,grammar:i,code:s};if(!s||!i)return n.hooks.run("complete",u),void 0;if(n.hooks.run("before-highlight",u),a&&_self.Worker){var c=new Worker(n.filename);c.onmessage=function(e){u.highlightedCode=e.data,n.hooks.run("before-insert",u),u.element.innerHTML=u.highlightedCode,r&&r.call(u.element),n.hooks.run("after-highlight",u),n.hooks.run("complete",u)},c.postMessage(JSON.stringify({language:u.language,code:u.code,immediateClose:!0}))}else u.highlightedCode=n.highlight(u.code,u.grammar,u.language),n.hooks.run("before-insert",u),u.element.innerHTML=u.highlightedCode,r&&r.call(t),n.hooks.run("after-highlight",u),n.hooks.run("complete",u)},highlight:function(e,t,r){var l=n.tokenize(e,t);return a.stringify(n.util.encode(l),r)},tokenize:function(e,t){var a=n.Token,r=[e],l=t.rest;if(l){for(var i in l)t[i]=l[i];delete t.rest}e:for(var i in t)if(t.hasOwnProperty(i)&&t[i]){var o=t[i];o="Array"===n.util.type(o)?o:[o];for(var s=0;s<o.length;++s){var u=o[s],c=u.inside,g=!!u.lookbehind,h=!!u.greedy,f=0,d=u.alias;u=u.pattern||u;for(var p=0;p<r.length;p++){var m=r[p];if(r.length>e.length)break e;if(!(m instanceof a)){u.lastIndex=0;var y=u.exec(m),v=1;if(!y&&h&&p!=r.length-1){var b=r[p+1].matchedStr||r[p+1],k=m+b;if(p<r.length-2&&(k+=r[p+2].matchedStr||r[p+2]),u.lastIndex=0,y=u.exec(k),!y)continue;var w=y.index+(g?y[1].length:0);if(w>=m.length)continue;var _=y.index+y[0].length,P=m.length+b.length;if(v=3,P>=_){if(r[p+1].greedy)continue;v=2,k=k.slice(0,P)}m=k}if(y){g&&(f=y[1].length);var w=y.index+f,y=y[0].slice(f),_=w+y.length,S=m.slice(0,w),O=m.slice(_),j=[p,v];S&&j.push(S);var A=new a(i,c?n.tokenize(y,c):y,d,y,h);j.push(A),O&&j.push(O),Array.prototype.splice.apply(r,j)}}}}}return r},hooks:{all:{},add:function(e,t){var a=n.hooks.all;a[e]=a[e]||[],a[e].push(t)},run:function(e,t){var a=n.hooks.all[e];if(a&&a.length)for(var r,l=0;r=a[l++];)r(t)}}},a=n.Token=function(e,t,n,a,r){this.type=e,this.content=t,this.alias=n,this.matchedStr=a||null,this.greedy=!!r};if(a.stringify=function(e,t,r){if("string"==typeof e)return e;if("Array"===n.util.type(e))return e.map(function(n){return a.stringify(n,t,e)}).join("");var l={type:e.type,content:a.stringify(e.content,t,r),tag:"span",classes:["token",e.type],attributes:{},language:t,parent:r};if("comment"==l.type&&(l.attributes.spellcheck="true"),e.alias){var i="Array"===n.util.type(e.alias)?e.alias:[e.alias];Array.prototype.push.apply(l.classes,i)}n.hooks.run("wrap",l);var o="";for(var s in l.attributes)o+=(o?" ":"")+s+'="'+(l.attributes[s]||"")+'"';return"<"+l.tag+' class="'+l.classes.join(" ")+'" '+o+">"+l.content+"</"+l.tag+">"},!_self.document)return _self.addEventListener?(_self.addEventListener("message",function(e){var t=JSON.parse(e.data),a=t.language,r=t.code,l=t.immediateClose;_self.postMessage(n.highlight(r,n.languages[a],a)),l&&_self.close()},!1),_self.Prism):_self.Prism;var r=document.currentScript||[].slice.call(document.getElementsByTagName("script")).pop();return r&&(n.filename=r.src,document.addEventListener&&!r.hasAttribute("data-manual")&&document.addEventListener("DOMContentLoaded",n.highlightAll)),_self.Prism}();"undefined"!=typeof module&&module.exports&&(module.exports=Prism),"undefined"!=typeof global&&(global.Prism=Prism);
+</script>
+
+<script type="text/javascript">
+!function(){"undefined"!=typeof self&&self.Prism&&self.document&&Prism.hooks.add("complete",function(e){if(e.code){var t=e.element.parentNode,s=/\s*\bline-numbers\b\s*/;if(t&&/pre/i.test(t.nodeName)&&(s.test(t.className)||s.test(e.element.className))&&!e.element.querySelector(".line-numbers-rows")){s.test(e.element.className)&&(e.element.className=e.element.className.replace(s,"")),s.test(t.className)||(t.className+=" line-numbers");var n,a=e.code.match(/\n(?!$)/g),l=a?a.length+1:1,m=new Array(l+1);m=m.join("<span></span>"),n=document.createElement("span"),n.className="line-numbers-rows",n.innerHTML=m,t.hasAttribute("data-start")&&(t.style.counterReset="linenumber "+(parseInt(t.getAttribute("data-start"),10)-1)),e.element.appendChild(n)}}})}();
+</script>
+
+<script type="text/x-mathjax-config">
+if (typeof MathJaxListener !== 'undefined') {
+  MathJax.Hub.Register.StartupHook('End', function () {
+    MathJaxListener.invokeCallbackForKey_('End');
+  });
+}
+</script>
+
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+
+</body>
+
+</html>

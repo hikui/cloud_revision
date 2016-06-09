@@ -17,9 +17,11 @@ The difference between a cloud and a grid can be expressed as below:
 * Resource distribution: Cloud computing is a ==centralized model== whereas grid computing is a ==decentralized model== where the computation could occur over many administrative domains.
 * Ownership: A grid is a collection of computers which is ==owned by multiple parties in multiple locations== and connected together so that users can ==share== the combined power of resources. Whereas a cloud is a collection of computers usually ==owned by a single party==.
 
-## History （how we got there）
+## What have led to the emergence of cloud computing
 
-> There may be some problems because I don't fully understand the slides...
+![](img/lead_to_cloud.png)
+
+## Architectures
 
 1. Centralised system
 	* Single physical system. All resources are fully shared and tightly coupled within one integrated OS. (Time sharing???)
@@ -98,7 +100,7 @@ The difference between a cloud and a grid can be expressed as below:
    * cons:
       * how to move data/resources when needed
       * don't know when to burst into public and what data can go to public cloud
-      * don't know public cloud compliant with PCI-DSS ( Payment Card Industry- Data Security Standard)
+      * don't know public cloud ==compliant== with PCI-DSS ( Payment Card Industry- Data Security Standard)
 
 # Practice
 
